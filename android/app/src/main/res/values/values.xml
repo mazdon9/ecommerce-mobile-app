@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Firebase Configuration Values -->
+    <string name="google_app_id">1:738163154097:android:509dbf6bac1312456f1690</string>
+    <string name="google_api_key">AIzaSyCEiJNsPz7WJSkJzsMlse2q6E2exaBgoVY</string>
+    <string name="firebase_database_url"></string>
+    <string name="google_storage_bucket">ecommerce-mobile-app-805e2.firebasestorage.app</string>
+    <string name="project_id">ecommerce-mobile-app-805e2</string>
+</resources>
