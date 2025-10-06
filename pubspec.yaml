@@ -78,6 +78,7 @@ dependencies:
   firebase_messaging: ^15.2.7
   firebase_analytics: ^11.5.0
   firebase_crashlytics: ^4.3.7
+  google_sign_in: ^6.2.1
 
 dev_dependencies:
   flutter_test:
@@ -125,3 +126,19 @@ flutter:
   #         weight: 400
   #       - asset: assets/fonts/SGilroy SemiBold.otf
   #         weight: 600
+
+  fonts:
+    - family: ReadexPro
+      fonts:
+        - asset: assets/fonts/ReadexPro-ExtraLight.ttf
+          weight: 200
+        - asset: assets/fonts/ReadexPro-Light.ttf
+          weight: 300
+        - asset: assets/fonts/ReadexPro-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/ReadexPro-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/ReadexPro-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/ReadexPro-Bold.ttf
+          weight: 700
