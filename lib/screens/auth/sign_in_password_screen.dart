@@ -1,55 +1,47 @@
+import 'package:ecommerce_mobile_app/router/route_name.dart';
+import 'package:ecommerce_mobile_app/screens/auth/widgets/widgets.dart';
 import 'package:ecommerce_mobile_app/services/auth_service.dart';
 import 'package:ecommerce_mobile_app/shared/app_button.dart';
-import 'package:ecommerce_mobile_app/screens/auth/widgets/widgets.dart';
 import 'package:ecommerce_mobile_app/theme/app_color_scheme.dart';
-import 'package:ecommerce_mobile_app/theme/app_typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-class ForgotPasswordScreen extends StatefulWidget {
-  const ForgotPasswordScreen({super.key});
+class SignInPasswordScreen extends StatefulWidget {
+  final String email;
+
+  const SignInPasswordScreen({super.key, required this.email});
 
   @override
-  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
+  State<SignInPasswordScreen> createState() => _SignInPasswordScreenState();
 }
 
-class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+class _SignInPasswordScreenState extends State<SignInPasswordScreen> {
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   bool _isLoading = false;
 
   @override
   void dispose() {
-    _emailController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
-  void _handleForgotPassword() async {
+  void _handleSignIn() async {
     if (_formKey.currentState!.validate()) {
       setState(() {
         _isLoading = true;
       });
-      
+
       try {
-        await AuthService.resetPassword(email: _emailController.text.trim());
-        
+        await AuthService.signInWithEmailAndPassword(
+          email: widget.email,
+          password: _passwordController.text,
+        );
+
         if (mounted) {
-          // Show success message
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                'Password reset email sent to ${_emailController.text}',
-                style: AppTypography.bodyMedium.copyWith(
-                  color: AppColorSchemes.white,
-                ),
-              ),
-              backgroundColor: AppColorSchemes.success,
-            ),
-          );
-          
-          // Navigate back to sign in
-          context.pop();
+          // Navigate to dashboard
+          context.go(RouteName.dashboardPath);
         }
       } catch (e) {
         if (mounted) {
@@ -83,33 +75,33 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 20.h),
-                
+
                 // Back button
                 const AuthBackButton(),
                 SizedBox(height: 24.h),
-                
-                // Title with subtitle
-                const AuthPageTitle(
-                  title: 'Forgot Password',
-                  subtitle: 'Enter Email address',
+
+                // Title
+                const AuthPageTitle(title: 'Sign in'),
+                SizedBox(height: 40.h),
+
+                // Password field
+                AuthPasswordField(controller: _passwordController),
+                SizedBox(height: 12.h),
+
+                // Forgot password link
+                AuthForgotPasswordLink(
+                  onTap: () => context.push(RouteName.forgotPasswordPath),
                 ),
                 SizedBox(height: 32.h),
-                
-                // Email field
-                AuthEmailField(
-                  controller: _emailController,
-                  hint: 'Enter Email address',
-                ),
-                SizedBox(height: 32.h),
-                
+
                 // Continue button
                 AppButton.primary(
                   content: 'Continue',
-                  onTap: _handleForgotPassword,
+                  onTap: _handleSignIn,
                   isLoading: _isLoading,
                   isEnabled: !_isLoading,
                 ),
-                
+
                 const Spacer(),
               ],
             ),

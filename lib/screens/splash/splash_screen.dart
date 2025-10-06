@@ -1,3 +1,4 @@
+import 'package:ecommerce_mobile_app/core/assets_gen/assets.gen.dart';
 import 'package:ecommerce_mobile_app/router/route_name.dart';
 import 'package:ecommerce_mobile_app/theme/app_color_scheme.dart';
 import 'package:ecommerce_mobile_app/theme/app_typography.dart';
@@ -31,27 +32,25 @@ class _SplashScreenState extends State<SplashScreen>
       vsync: this,
     );
 
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: const Interval(0.0, 0.6, curve: Curves.easeIn),
-    ));
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: const Interval(0.0, 0.6, curve: Curves.easeIn),
+      ),
+    );
 
-    _scaleAnimation = Tween<double>(
-      begin: 0.8,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: const Interval(0.0, 0.8, curve: Curves.elasticOut),
-    ));
+    _scaleAnimation = Tween<double>(begin: 0.8, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: const Interval(0.0, 0.8, curve: Curves.elasticOut),
+      ),
+    );
 
     _animationController.forward();
   }
 
   void _navigateToSignIn() {
-    Future.delayed(const Duration(milliseconds: 3000), () {
+    Future.delayed(const Duration(seconds: 3), () {
       if (mounted) {
         context.go(RouteName.signInPath);
       }
@@ -78,10 +77,7 @@ class _SplashScreenState extends State<SplashScreen>
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [
-                  AppColorSchemes.primary,
-                  AppColorSchemes.primaryDark,
-                ],
+                colors: [AppColorSchemes.primary, AppColorSchemes.primaryDark],
               ),
             ),
             child: Center(
@@ -92,19 +88,16 @@ class _SplashScreenState extends State<SplashScreen>
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // Logo or Brand name
-                      Text(
-                        'Clot',
-                        style: AppTypography.logoLarge,
-                      ),
-                      SizedBox(height: 16.h),
+                      // Logo image
+                      Assets.images.logo.image(width: 120.w, height: 120.w),
+                      SizedBox(height: 24.h),
                       // Subtitle or tagline
                       FadeTransition(
                         opacity: _fadeAnimation,
                         child: Text(
                           'Fashion at your fingertips',
                           style: AppTypography.bodyMedium.copyWith(
-                            color: AppColorSchemes.white.withOpacity(0.8),
+                            color: AppColorSchemes.white.withAlpha(80),
                           ),
                         ),
                       ),

@@ -14,11 +14,33 @@ import 'package:flutter/widgets.dart';
 class $AssetsFontsGen {
   const $AssetsFontsGen();
 
-  /// File path: assets/fonts/Circular-Regular.ttf
-  String get circularRegular => 'assets/fonts/Circular-Regular.ttf';
+  /// File path: assets/fonts/ReadexPro-Bold.ttf
+  String get readexProBold => 'assets/fonts/ReadexPro-Bold.ttf';
+
+  /// File path: assets/fonts/ReadexPro-ExtraLight.ttf
+  String get readexProExtraLight => 'assets/fonts/ReadexPro-ExtraLight.ttf';
+
+  /// File path: assets/fonts/ReadexPro-Light.ttf
+  String get readexProLight => 'assets/fonts/ReadexPro-Light.ttf';
+
+  /// File path: assets/fonts/ReadexPro-Medium.ttf
+  String get readexProMedium => 'assets/fonts/ReadexPro-Medium.ttf';
+
+  /// File path: assets/fonts/ReadexPro-Regular.ttf
+  String get readexProRegular => 'assets/fonts/ReadexPro-Regular.ttf';
+
+  /// File path: assets/fonts/ReadexPro-SemiBold.ttf
+  String get readexProSemiBold => 'assets/fonts/ReadexPro-SemiBold.ttf';
 
   /// List of all assets
-  List<String> get values => [circularRegular];
+  List<String> get values => [
+    readexProBold,
+    readexProExtraLight,
+    readexProLight,
+    readexProMedium,
+    readexProRegular,
+    readexProSemiBold,
+  ];
 }
 
 class $AssetsImagesGen {

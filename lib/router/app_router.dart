@@ -1,7 +1,8 @@
 import 'package:ecommerce_mobile_app/router/route_name.dart';
+import 'package:ecommerce_mobile_app/screens/auth/forgot_password_screen.dart';
+import 'package:ecommerce_mobile_app/screens/auth/sign_in_password_screen.dart';
 import 'package:ecommerce_mobile_app/screens/auth/sign_in_screen.dart';
 import 'package:ecommerce_mobile_app/screens/auth/sign_up_screen.dart';
-import 'package:ecommerce_mobile_app/screens/auth/forgot_password_screen.dart';
 import 'package:ecommerce_mobile_app/screens/splash/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,6 +18,14 @@ final GoRouter appRouter = GoRouter(
       path: RouteName.signInPath,
       name: RouteName.signInPath,
       builder: (context, state) => const SignInScreen(),
+    ),
+    GoRoute(
+      path: RouteName.signInPasswordPath,
+      name: RouteName.signInPasswordPath,
+      builder: (context, state) {
+        final email = state.uri.queryParameters['email'] ?? '';
+        return SignInPasswordScreen(email: email);
+      },
     ),
     GoRoute(
       path: RouteName.signUpPath,

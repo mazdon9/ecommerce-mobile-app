@@ -7,18 +7,10 @@ class SocialIcon extends StatelessWidget {
   final Color? color;
   final double? size;
 
-  const SocialIcon({
-    super.key,
-    required this.icon,
-    this.color,
-    this.size,
-  });
+  const SocialIcon({super.key, required this.icon, this.color, this.size});
 
   factory SocialIcon.apple() {
-    return const SocialIcon(
-      icon: Icons.apple,
-      color: AppColorSchemes.apple,
-    );
+    return const SocialIcon(icon: Icons.apple, color: AppColorSchemes.apple);
   }
 
   factory SocialIcon.google() {
@@ -56,9 +48,7 @@ class GoogleIcon extends StatelessWidget {
     return Container(
       width: size ?? 20.w,
       height: size ?? 20.w,
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-      ),
+      decoration: const BoxDecoration(shape: BoxShape.circle),
       child: Center(
         child: Text(
           'G',
@@ -81,15 +71,11 @@ class AppleIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Icon(
-      Icons.apple,
-      color: AppColorSchemes.apple,
-      size: size ?? 20.w,
-    );
+    return Icon(Icons.apple, color: AppColorSchemes.apple, size: size ?? 20.w);
   }
 }
 
-// Facebook icon 
+// Facebook icon
 class FacebookIcon extends StatelessWidget {
   final double? size;
 

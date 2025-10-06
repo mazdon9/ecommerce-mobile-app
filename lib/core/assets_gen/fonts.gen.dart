@@ -11,6 +11,6 @@
 class FontFamily {
   FontFamily._();
 
-  /// Font family: Circular
-  static const String circular = 'Circular';
+  /// Font family: ReadexPro
+  static const String readexPro = 'ReadexPro';
 }

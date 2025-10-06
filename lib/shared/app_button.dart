@@ -4,12 +4,7 @@ import 'package:ecommerce_mobile_app/theme/app_typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-enum AppButtonType {
-  primary,
-  secondary,
-  social,
-  text,
-}
+enum AppButtonType { primary, secondary, social, text }
 
 class AppButton extends StatelessWidget {
   final String content;
@@ -105,7 +100,7 @@ class AppButton extends StatelessWidget {
 
   Color get _backgroundColor {
     if (backgroundColor != null) return backgroundColor!;
-    
+
     switch (type) {
       case AppButtonType.primary:
         return isEnabled ? AppColorSchemes.primary : AppColorSchemes.grey;
@@ -120,7 +115,7 @@ class AppButton extends StatelessWidget {
 
   Color get _textColor {
     if (textColor != null) return textColor!;
-    
+
     switch (type) {
       case AppButtonType.primary:
         return AppColorSchemes.white;
@@ -134,13 +129,10 @@ class AppButton extends StatelessWidget {
 
   Border? get _border {
     if (border != null) return border;
-    
+
     switch (type) {
       case AppButtonType.social:
-        return Border.all(
-          color: AppColorSchemes.inputBorder,
-          width: 1,
-        );
+        return Border.all(color: AppColorSchemes.inputBorder, width: 1);
       default:
         return null;
     }
@@ -172,24 +164,17 @@ class AppButton extends StatelessWidget {
             : Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  if (icon != null) ...[
-                    icon!,
-                    SizedBox(width: 12.w),
-                  ],
+                  if (icon != null) ...[icon!, SizedBox(width: 12.w)],
                   Flexible(
                     child: AppText(
                       title: content,
                       textAlign: TextAlign.center,
-                      style: textStyle ??
-                          AppTypography.buttonLarge.copyWith(
-                            color: _textColor,
-                          ),
+                      style:
+                          textStyle ??
+                          AppTypography.buttonLarge.copyWith(color: _textColor),
                     ),
                   ),
-                  if (trailing != null) ...[
-                    SizedBox(width: 12.w),
-                    trailing!,
-                  ],
+                  if (trailing != null) ...[SizedBox(width: 12.w), trailing!],
                 ],
               ),
       ),

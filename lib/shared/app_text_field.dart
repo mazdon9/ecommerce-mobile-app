@@ -99,17 +99,11 @@ class _AppTextFieldState extends State<AppTextField> {
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: widget.borderRadius ?? BorderRadius.circular(12.r),
-              borderSide: BorderSide(
-                color: AppColorSchemes.error,
-                width: 1,
-              ),
+              borderSide: BorderSide(color: AppColorSchemes.error, width: 1),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: widget.borderRadius ?? BorderRadius.circular(12.r),
-              borderSide: BorderSide(
-                color: AppColorSchemes.error,
-                width: 2,
-              ),
+              borderSide: BorderSide(color: AppColorSchemes.error, width: 2),
             ),
             disabledBorder: OutlineInputBorder(
               borderRadius: widget.borderRadius ?? BorderRadius.circular(12.r),

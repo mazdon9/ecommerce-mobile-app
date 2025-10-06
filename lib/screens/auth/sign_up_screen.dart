@@ -1,10 +1,9 @@
 import 'package:ecommerce_mobile_app/router/route_name.dart';
+import 'package:ecommerce_mobile_app/screens/auth/widgets/widgets.dart';
 import 'package:ecommerce_mobile_app/services/auth_service.dart';
 import 'package:ecommerce_mobile_app/shared/app_button.dart';
-import 'package:ecommerce_mobile_app/shared/app_text.dart';
 import 'package:ecommerce_mobile_app/shared/app_text_field.dart';
 import 'package:ecommerce_mobile_app/theme/app_color_scheme.dart';
-import 'package:ecommerce_mobile_app/theme/app_typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -22,7 +21,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _lastNameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool _isPasswordVisible = false;
   bool _isLoading = false;
 
   @override
@@ -39,7 +37,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() {
         _isLoading = true;
       });
-      
+
       try {
         await AuthService.createUserWithEmailAndPassword(
           email: _emailController.text.trim(),
@@ -47,7 +45,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           firstName: _firstNameController.text.trim(),
           lastName: _lastNameController.text.trim(),
         );
-        
+
         if (mounted) {
           // Navigate to dashboard
           context.go(RouteName.dashboardPath);
@@ -84,33 +82,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 20.h),
-                
+
                 // Back button
-                GestureDetector(
-                  onTap: () => context.pop(),
-                  child: Container(
-                    width: 40.w,
-                    height: 40.w,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppColorSchemes.surface,
-                    ),
-                    child: Icon(
-                      Icons.arrow_back_ios_new,
-                      size: 16.w,
-                      color: AppColorSchemes.black,
-                    ),
-                  ),
-                ),
+                const AuthBackButton(),
                 SizedBox(height: 24.h),
-                
+
                 // Title
-                AppText(
-                  title: 'Create Account',
-                  style: AppTypography.pageTitle,
-                ),
+                const AuthPageTitle(title: 'Create Account'),
                 SizedBox(height: 32.h),
-                
+
                 // First name field
                 AppTextField(
                   hint: 'Firstname',
@@ -124,7 +104,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   },
                 ),
                 SizedBox(height: 20.h),
-                
+
                 // Last name field
                 AppTextField(
                   hint: 'Lastname',
@@ -138,93 +118,37 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   },
                 ),
                 SizedBox(height: 20.h),
-                
+
                 // Email field
-                AppTextField(
-                  hint: 'Email Address',
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your email';
-                    }
-                    if (!value.contains('@')) {
-                      return 'Please enter a valid email';
-                    }
-                    return null;
-                  },
-                ),
+                AuthEmailField(controller: _emailController),
                 SizedBox(height: 20.h),
-                
+
                 // Password field
-                AppTextField(
-                  hint: 'Password',
-                  controller: _passwordController,
-                  obscureText: !_isPasswordVisible,
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _isPasswordVisible 
-                          ? Icons.visibility_off 
-                          : Icons.visibility,
-                      color: AppColorSchemes.grey,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _isPasswordVisible = !_isPasswordVisible;
-                      });
-                    },
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your password';
-                    }
-                    if (value.length < 6) {
-                      return 'Password must be at least 6 characters';
-                    }
-                    return null;
-                  },
-                ),
+                AuthPasswordField(controller: _passwordController),
                 SizedBox(height: 12.h),
-                
+
                 // Forgot password link
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: GestureDetector(
-                    onTap: () => context.push(RouteName.forgotPasswordPath),
-                    child: AppText(
-                      title: 'Forgot Password?',
-                      style: AppTypography.linkSmall,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 32.h),
-                
+
                 // Continue button
+                SizedBox(height: 40.h),
                 AppButton.primary(
                   content: 'Continue',
                   onTap: _handleSignUp,
                   isLoading: _isLoading,
                   isEnabled: !_isLoading,
                 ),
-                
+                SizedBox(height: 40.h),
+                AuthForgotPasswordLink(
+                  onTap: () => context.push(RouteName.forgotPasswordPath),
+                ),
+
                 const Spacer(),
-                
+
                 // Already have account section
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    AppText(
-                      title: "Already have an Account? ",
-                      style: AppTypography.bodyMedium,
-                    ),
-                    GestureDetector(
-                      onTap: () => context.pop(),
-                      child: AppText(
-                        title: 'Sign In',
-                        style: AppTypography.linkText,
-                      ),
-                    ),
-                  ],
+                AuthBottomLink(
+                  question: "Already have an Account? ",
+                  actionText: 'Sign In',
+                  onTap: () => context.pop(),
                 ),
                 SizedBox(height: 24.h),
               ],
