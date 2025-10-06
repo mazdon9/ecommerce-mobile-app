@@ -3,22 +3,15 @@ import 'package:ecommerce_mobile_app/screens/auth/forgot_password_screen.dart';
 import 'package:ecommerce_mobile_app/screens/auth/sign_in_password_screen.dart';
 import 'package:ecommerce_mobile_app/screens/auth/sign_in_screen.dart';
 import 'package:ecommerce_mobile_app/screens/auth/sign_up_screen.dart';
+import 'package:ecommerce_mobile_app/screens/dashboard/dashboard_screen.dart';
 import 'package:ecommerce_mobile_app/screens/splash/splash_screen.dart';
 import 'package:go_router/go_router.dart';
 
 final GoRouter appRouter = GoRouter(
   initialLocation: RouteName.splashPath,
   routes: [
-    GoRoute(
-      path: RouteName.splashPath,
-      name: RouteName.splashPath,
-      builder: (context, state) => const SplashScreen(),
-    ),
-    GoRoute(
-      path: RouteName.signInPath,
-      name: RouteName.signInPath,
-      builder: (context, state) => const SignInScreen(),
-    ),
+    GoRoute(path: RouteName.splashPath, name: RouteName.splashPath, builder: (context, state) => const SplashScreen()),
+    GoRoute(path: RouteName.signInPath, name: RouteName.signInPath, builder: (context, state) => const SignInScreen()),
     GoRoute(
       path: RouteName.signInPasswordPath,
       name: RouteName.signInPasswordPath,
@@ -27,15 +20,8 @@ final GoRouter appRouter = GoRouter(
         return SignInPasswordScreen(email: email);
       },
     ),
-    GoRoute(
-      path: RouteName.signUpPath,
-      name: RouteName.signUpPath,
-      builder: (context, state) => const SignUpScreen(),
-    ),
-    GoRoute(
-      path: RouteName.forgotPasswordPath,
-      name: RouteName.forgotPasswordPath,
-      builder: (context, state) => const ForgotPasswordScreen(),
-    ),
+    GoRoute(path: RouteName.signUpPath, name: RouteName.signUpPath, builder: (context, state) => const SignUpScreen()),
+    GoRoute(path: RouteName.forgotPasswordPath, name: RouteName.forgotPasswordPath, builder: (context, state) => const ForgotPasswordScreen()),
+    GoRoute(path: RouteName.dashboardPath, name: RouteName.dashboardPath, builder: (context, state) => const DashboardScreen()),
   ],
 );

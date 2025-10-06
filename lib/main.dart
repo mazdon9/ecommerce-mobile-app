@@ -1,3 +1,4 @@
+import 'package:ecommerce_mobile_app/di/injector.dart';
 import 'package:ecommerce_mobile_app/firebase_options.dart';
 import 'package:ecommerce_mobile_app/router/app_router.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await configureDependencies();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
@@ -23,9 +25,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp.router(
           title: 'Ecommercial App',
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          ),
+          theme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple)),
           routerConfig: appRouter,
         );
       },

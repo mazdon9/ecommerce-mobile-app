@@ -1,7 +1,7 @@
 import 'package:ecommerce_mobile_app/router/route_name.dart';
 import 'package:ecommerce_mobile_app/screens/auth/widgets/widgets.dart';
-import 'package:ecommerce_mobile_app/services/auth_service.dart';
 import 'package:ecommerce_mobile_app/shared/app_button.dart';
+import 'package:ecommerce_mobile_app/shared/app_text_field.dart';
 import 'package:ecommerce_mobile_app/theme/app_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,10 +34,7 @@ class _SignInPasswordScreenState extends State<SignInPasswordScreen> {
       });
 
       try {
-        await AuthService.signInWithEmailAndPassword(
-          email: widget.email,
-          password: _passwordController.text,
-        );
+        // await AuthService.signInWithEmailAndPassword(email: widget.email, password: _passwordController.text);
 
         if (mounted) {
           // Navigate to dashboard
@@ -45,12 +42,7 @@ class _SignInPasswordScreenState extends State<SignInPasswordScreen> {
         }
       } catch (e) {
         if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(e.toString()),
-              backgroundColor: AppColorSchemes.error,
-            ),
-          );
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString()), backgroundColor: AppColorSchemes.error));
         }
       } finally {
         if (mounted) {
@@ -85,22 +77,15 @@ class _SignInPasswordScreenState extends State<SignInPasswordScreen> {
                 SizedBox(height: 40.h),
 
                 // Password field
-                AuthPasswordField(controller: _passwordController),
+                AppTextField(controller: _passwordController),
                 SizedBox(height: 12.h),
 
                 // Forgot password link
-                AuthForgotPasswordLink(
-                  onTap: () => context.push(RouteName.forgotPasswordPath),
-                ),
+                AuthForgotPasswordLink(onTap: () => context.push(RouteName.forgotPasswordPath)),
                 SizedBox(height: 32.h),
 
                 // Continue button
-                AppButton.primary(
-                  content: 'Continue',
-                  onTap: _handleSignIn,
-                  isLoading: _isLoading,
-                  isEnabled: !_isLoading,
-                ),
+                AppButton.primary(content: 'Continue', onTap: _handleSignIn, isLoading: _isLoading, isEnabled: !_isLoading),
 
                 const Spacer(),
               ],
