@@ -91,7 +91,7 @@ class _SignInScreenState extends State<SignInScreen> {
 
                 // Don't have account section
                 AuthBottomLink(
-                  question: "Don't have an Account? ",
+                  question: "Don't have an account? ",
                   actionText: 'Create One',
                   onTap: () => context.push(RouteName.signUpPath),
                 ),
