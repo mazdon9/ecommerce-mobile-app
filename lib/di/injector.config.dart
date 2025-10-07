@@ -13,9 +13,12 @@ import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
 import 'package:ecommerce_mobile_app/core/logging/app_logger.dart' as _i701;
 import 'package:ecommerce_mobile_app/core/logging/console_app_logger.dart'
     as _i314;
+import 'package:ecommerce_mobile_app/cubit/profile/profile_cubit.dart' as _i739;
 import 'package:ecommerce_mobile_app/di/third_party_module.dart' as _i498;
 import 'package:ecommerce_mobile_app/repositories/auth_repository.dart'
     as _i290;
+import 'package:ecommerce_mobile_app/repositories/user_repository.dart'
+    as _i463;
 import 'package:ecommerce_mobile_app/services/remote/firebase_service.dart'
     as _i527;
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
@@ -53,6 +56,19 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.lazySingleton<_i290.AuthRepository>(
       () => _i290.AuthRepository(
+        gh<_i527.FirebaseService>(),
+        gh<_i701.AppLogger>(),
+      ),
+    );
+    gh.lazySingleton<_i463.UserRepository>(
+      () => _i463.UserRepository(
+        gh<_i527.FirebaseService>(),
+        gh<_i701.AppLogger>(),
+      ),
+    );
+    gh.lazySingleton<_i739.ProfileCubit>(
+      () => _i739.ProfileCubit(
+        gh<_i463.UserRepository>(),
         gh<_i527.FirebaseService>(),
         gh<_i701.AppLogger>(),
       ),
