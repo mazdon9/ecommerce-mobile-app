@@ -1,10 +1,10 @@
-import 'package:ecommerce_mobile_app/data/mock_data.dart';
 import 'package:ecommerce_mobile_app/screens/categories/categories_screen.dart';
 import 'package:ecommerce_mobile_app/screens/categories/category_products_screen.dart';
 import 'package:ecommerce_mobile_app/screens/home/widgets/category_item.dart';
 import 'package:ecommerce_mobile_app/screens/home/widgets/custom_search_bar.dart';
 import 'package:ecommerce_mobile_app/screens/home/widgets/product_card.dart';
 import 'package:ecommerce_mobile_app/screens/home/widgets/section_header.dart';
+import 'package:ecommerce_mobile_app/services/product_service.dart';
 import 'package:ecommerce_mobile_app/theme/app_color_scheme.dart';
 import 'package:ecommerce_mobile_app/theme/app_typography.dart';
 import 'package:flutter/material.dart';
@@ -120,10 +120,10 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 88.h,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
-                itemCount: MockData.categories.length,
+                itemCount: ProductService.getAllCategories().length,
                 separatorBuilder: (context, index) => SizedBox(width: 16.w),
                 itemBuilder: (context, index) {
-                  final category = MockData.categories[index];
+                  final category = ProductService.getAllCategories()[index];
                   return CategoryItem(
                     category: category,
                     onTap: () {
@@ -159,16 +159,16 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 250.h,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
-                itemCount: MockData.topSellingProducts.length,
+                itemCount: ProductService.getTopSellingProducts().length,
                 separatorBuilder: (context, index) => SizedBox(width: 16.w),
                 itemBuilder: (context, index) {
                   return ProductCard(
-                    product: MockData.topSellingProducts[index],
+                    product: ProductService.getTopSellingProducts()[index],
                     onTap: () {
                       // TODO: Navigate to product detail
                     },
                     onFavoriteTap: () {
-                      // TODO: Toggle favorite
+                      // Leave empty - No logic for favorite handling
                     },
                   );
                 },
@@ -192,16 +192,16 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 250.h,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
-                itemCount: MockData.newInProducts.length,
+                itemCount: ProductService.getNewInProducts().length,
                 separatorBuilder: (context, index) => SizedBox(width: 16.w),
                 itemBuilder: (context, index) {
                   return ProductCard(
-                    product: MockData.newInProducts[index],
+                    product: ProductService.getNewInProducts()[index],
                     onTap: () {
                       // TODO: Navigate to product detail
                     },
                     onFavoriteTap: () {
-                      // TODO: Toggle favorite
+                      // Leave empty - No logic for favorite handling
                     },
                   );
                 },

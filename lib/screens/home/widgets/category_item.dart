@@ -1,4 +1,5 @@
 import 'package:ecommerce_mobile_app/models/category.dart';
+import 'package:ecommerce_mobile_app/shared/widgets/common_image_widget.dart';
 import 'package:ecommerce_mobile_app/theme/app_color_scheme.dart';
 import 'package:ecommerce_mobile_app/theme/app_typography.dart';
 import 'package:flutter/material.dart';
@@ -33,22 +34,19 @@ class CategoryItem extends StatelessWidget {
                   ),
                 ],
               ),
-              child: ClipOval(
-                child: Image.network(
-                  category.iconPath,
-                  width: 60.w,
-                  height: 60.h,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      color: AppColorSchemes.surface,
-                      child: Icon(
-                        Icons.category,
-                        size: 32.r,
-                        color: AppColorSchemes.primary,
-                      ),
-                    );
-                  },
+              child: CommonImageWidget(
+                imageUrl: category.iconPath,
+                width: 60.w,
+                height: 60.h,
+                isCircular: true,
+                fit: BoxFit.cover,
+                errorWidget: Container(
+                  color: AppColorSchemes.surface,
+                  child: Icon(
+                    Icons.category,
+                    size: 32.r,
+                    color: AppColorSchemes.primary,
+                  ),
                 ),
               ),
             ),

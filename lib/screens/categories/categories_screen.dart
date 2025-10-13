@@ -1,6 +1,8 @@
-import 'package:ecommerce_mobile_app/data/mock_data.dart';
 import 'package:ecommerce_mobile_app/models/category.dart';
 import 'package:ecommerce_mobile_app/screens/categories/category_products_screen.dart';
+import 'package:ecommerce_mobile_app/services/product_service.dart';
+import 'package:ecommerce_mobile_app/shared/widgets/common_card.dart';
+import 'package:ecommerce_mobile_app/shared/widgets/common_image_widget.dart';
 import 'package:ecommerce_mobile_app/theme/app_color_scheme.dart';
 import 'package:ecommerce_mobile_app/theme/app_typography.dart';
 import 'package:flutter/material.dart';
@@ -39,9 +41,9 @@ class CategoriesScreen extends StatelessWidget {
             mainAxisSpacing: 16.h,
             childAspectRatio: 1.0,
           ),
-          itemCount: MockData.categories.length,
+          itemCount: ProductService.getAllCategories().length,
           itemBuilder: (context, index) {
-            final category = MockData.categories[index];
+            final category = ProductService.getAllCategories()[index];
             return _CategoryCard(
               category: category,
               onTap: () {
@@ -71,77 +73,63 @@ class _CategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return CommonCard(
       onTap: onTap,
-      child: Container(
-        decoration: BoxDecoration(
-          color: AppColorSchemes.surface,
-          borderRadius: BorderRadius.circular(16.r),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              blurRadius: 8,
-              offset: const Offset(0, 2),
-            ),
-          ],
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              width: 80.w,
-              height: 80.h,
-              decoration: BoxDecoration(
-                color: AppColorSchemes.surface,
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: ClipOval(
-                child: Image.network(
-                  category.iconPath,
-                  width: 80.w,
-                  height: 80.h,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      color: AppColorSchemes.primary.withOpacity(0.1),
-                      child: Icon(
-                        Icons.category,
-                        size: 40.r,
-                        color: AppColorSchemes.primary,
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-            SizedBox(height: 16.h),
-            Text(
-              category.name,
-              style: AppTypography.bodyLarge.copyWith(
-                fontWeight: FontWeight.w600,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 4.h),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.arrow_forward_ios,
-                  size: 12.r,
-                  color: AppColorSchemes.grey,
+      backgroundColor: AppColorSchemes.surface,
+      borderRadius: 16.r,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: 80.w,
+            height: 80.h,
+            decoration: BoxDecoration(
+              color: AppColorSchemes.surface,
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
                 ),
               ],
             ),
-          ],
-        ),
+            child: CommonImageWidget(
+              imageUrl: category.iconPath,
+              width: 80.w,
+              height: 80.h,
+              isCircular: true,
+              fit: BoxFit.cover,
+              errorWidget: Container(
+                color: AppColorSchemes.primary.withOpacity(0.1),
+                child: Icon(
+                  Icons.category,
+                  size: 40.r,
+                  color: AppColorSchemes.primary,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(height: 16.h),
+          Text(
+            category.name,
+            style: AppTypography.bodyLarge.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          SizedBox(height: 4.h),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.arrow_forward_ios,
+                size: 12.r,
+                color: AppColorSchemes.grey,
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
