@@ -19,6 +19,8 @@ import 'package:ecommerce_mobile_app/repositories/auth_repository.dart'
     as _i290;
 import 'package:ecommerce_mobile_app/repositories/user_repository.dart'
     as _i463;
+import 'package:ecommerce_mobile_app/services/notification/notification_service.dart'
+    as _i289;
 import 'package:ecommerce_mobile_app/services/remote/firebase_service.dart'
     as _i527;
 import 'package:firebase_auth/firebase_auth.dart' as _i59;
@@ -47,6 +49,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => thirdPartyModule.firebaseFirestore(),
     );
     gh.lazySingleton<_i701.AppLogger>(() => _i314.ConsoleAppLogger());
+    gh.lazySingleton<_i289.NotificationService>(
+      () => _i289.NotificationService(gh<_i701.AppLogger>()),
+    );
     gh.lazySingleton<_i527.FirebaseService>(
       () => _i527.FirebaseService(
         gh<_i59.FirebaseAuth>(),
