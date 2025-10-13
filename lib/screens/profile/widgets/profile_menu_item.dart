@@ -7,33 +7,46 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class ProfileMenuItem extends StatelessWidget {
   final String title;
   final VoidCallback onTap;
-  final bool showDivider;
 
-  const ProfileMenuItem({super.key, required this.title, required this.onTap, this.showDivider = true});
+  const ProfileMenuItem({super.key, required this.title, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        GestureDetector(
-          onTap: onTap,
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 16.h),
-            child: Row(
-              children: [
-                Expanded(
-                  child: AppText(
-                    title: title,
-                    style: AppTypography.bodyLarge.copyWith(color: AppColorSchemes.black),
-                  ),
-                ),
-                Icon(Icons.arrow_forward_ios, size: 16.w, color: AppColorSchemes.grey),
-              ],
-            ),
+    return Container(
+      margin: EdgeInsets.only(bottom: 16.h),
+      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
+      decoration: BoxDecoration(
+        color: AppColorSchemes.grey.withAlpha(20),
+        borderRadius: BorderRadius.circular(12.r),
+        boxShadow: [
+          BoxShadow(
+            color: AppColorSchemes.black.withAlpha(4),
+            blurRadius: 8,
+            offset: const Offset(0, 2),
           ),
+        ],
+      ),
+      child: GestureDetector(
+        onTap: onTap,
+        child: Row(
+          children: [
+            Expanded(
+              child: AppText(
+                title: title,
+                style: AppTypography.bodyLarge.copyWith(
+                  color: AppColorSchemes.black,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            Icon(
+              Icons.arrow_forward_ios,
+              size: 16.w,
+              color: AppColorSchemes.grey,
+            ),
+          ],
         ),
-        if (showDivider) Divider(height: 1, thickness: 1, color: AppColorSchemes.grey.withOpacity(0.2)),
-      ],
+      ),
     );
   }
 }
