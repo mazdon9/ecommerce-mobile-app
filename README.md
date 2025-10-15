@@ -1,6 +1,18 @@
 # ecommerce_mobile_app
 
-A new Flutter project.
+✨ Key Features
+
+🏠 Home Screen – Display all available products
+
+❤️ Wishlist – Save favorite items for later
+
+🛒 Cart Management – Add, update, or remove items easily
+
+📦 Product Details – View item info and pricing
+
+👤 User Authentication – Sign up & sign in with Firebase
+
+🔔 Real-time Updates – Seamless and responsive user experience
 
 ## Getting Started
 
